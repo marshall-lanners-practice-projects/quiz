@@ -12,8 +12,12 @@ server.use(morgan('tiny'))
 server.use(cors())
 
 const userRoutes = require('./Routes/userRoutes')
+const quizRoutes = require('./Routes/quizRoutes')
+const questionsRoutes = require('./Routes/questionsRoutes')
 
 server.use('/users', userRoutes)
+server.use('/quiz', quizRoutes)
+server.use('/questions', questionsRoutes)
 
 
 const port = process.env.PORT || 4000

@@ -21,7 +21,7 @@ function generateToken(user){
 }
 
 // Create
-// create a new user, and sets that users shopping cart
+// create a new user
 //-------------------------------------------
 router.post('/register', (req, res) => {
 	let  {user_name, email, password} = req.body
@@ -43,7 +43,7 @@ router.post('/register', (req, res) => {
 		})
 		.catch(err => {
 			console.log(err);
-			res.status(500).json(error)
+			res.status(500).json(err)
 		})
 })
 

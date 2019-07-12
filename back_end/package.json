@@ -16,7 +16,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "server": "nodemon index.js"
+    "server": "nodemon index.js",
+    "up": "git add . && git commit -m 'update' && git push heroku master"
   },
   "devDependencies": {
     "sqlite3": "^4.0.9"
