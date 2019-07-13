@@ -12,6 +12,8 @@ router.post('', (req, res) => {
 
 	const { question_array } = req.body
 
+	console.log(question_array)
+
 	db.insert(question_array).into('questions')
 	.then(response => {
 		return res.status(200).json(response)

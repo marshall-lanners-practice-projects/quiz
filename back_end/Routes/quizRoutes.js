@@ -14,8 +14,14 @@ router.post('', (req, res) => {
 	const { name, type, user_id } = req.body
 
 	db.insert({name, type, user_id}).into('quiz')
-	.then(response => {
-		return res.status(200).json(response)
+	.then(() => {
+		db('quiz')
+		.where({name})
+		.first()
+		.select('quiz.id')
+		.then(response => {
+			return res.status(200).json(response)
+		})
 	})
 	.catch(error => {
 		console.log(error)
