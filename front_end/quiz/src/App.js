@@ -1,7 +1,7 @@
 import React from 'react';
-import Quizs from './components/Quizs';
-import Quiz from './components/Quiz';
-import CreateQuiz from './components/CreateQuiz'
+import Quizs from './components/quiz_components/Quizs';
+import Quiz from './components/quiz_components/Quiz';
+import CreateQuiz from './components/quiz_components/CreateQuiz'
 import { Route } from "react-router-dom";
 
 function App() {
