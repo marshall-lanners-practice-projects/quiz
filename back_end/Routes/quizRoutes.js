@@ -14,14 +14,8 @@ router.post('', (req, res) => {
 	const { name, type, user_id } = req.body
 
 	db.insert({name, type, user_id}).into('quiz')
-	.then(() => {
-		db('quiz')
-		.where({name})
-		.first()
-		.select('quiz.id')
-		.then(response => {
-			return res.status(200).json(response)
-		})
+	.then(response => {
+		return res.status(200).json(response)
 	})
 	.catch(error => {
 		console.log(error)
@@ -31,11 +25,11 @@ router.post('', (req, res) => {
 })
 
 // Get
-// Get all quiz's
+// Get all completed quiz's
 //-------------------------------------------
 router.get('', (req, res) => {
-
 	db('quiz')
+	.where({completed: true})
 	.then(response => {
 		return res.status(200).json(response)
 	})
@@ -76,9 +70,16 @@ router.get('/by_user', (req, res) => {
 	db('users')
 	.join('quiz', 'users.id', 'quiz.user_id')
 	.where({user_id})
-	.select('quiz.id', 'name', 'type')
+	.select('quiz.id', 'name', 'type', 'completed')
 	.then(response => {
-		return res.status(200).json(response)
+
+		let data = response.data, rdy = [], pend = []
+
+		for (let i = 0; i < data.length; i++){
+			data[i].completed === true ? (rdy.push(data[i])) : pend.push(data[i])
+		}
+
+		return res.status(200).json({ready: rdy, pending: pend})
 	})
 	.catch(error => {
 		console.log(error)

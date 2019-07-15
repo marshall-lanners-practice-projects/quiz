@@ -12,6 +12,10 @@ exports.up = function(knex, Promise) {
       .notNullable()
 
     tbl
+      .boolean('completed')
+      .defaultTo(false)
+
+    tbl
       .integer('user_id')
       .references('id')
       .inTable('users')
